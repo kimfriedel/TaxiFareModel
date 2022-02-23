@@ -53,3 +53,18 @@ pypi_test:
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
+
+# project id - replace with your GCP project id
+PROJECT_ID=le-wagon-815
+
+# bucket name - replace with your GCP bucket name
+BUCKET_NAME=wagon-data-815-friedel
+
+# choose your region from https://cloud.google.com/storage/docs/locations#available_locations
+REGION=europe-west1
+
+set_project:
+	@gcloud config set project ${PROJECT_ID}
+
+create_bucket:
+	@gsutil mb -l ${REGION} -p ${PROJECT_ID} gs://${BUCKET_NAME}
